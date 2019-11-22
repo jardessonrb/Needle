@@ -1,0 +1,27 @@
+{
+  "name": "jardessonrs/SysPrinter",
+  "description": "PROJETO DE CONTROLE DE IMPRESSORA",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jardesson ribeiro",
+      "email": "jardessonrs1117@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Source\\": "source/"
+    },
+    "files": [
+      "source/Config.php"
+    ]
+  },
+  "require": {
+  
+    "coffeecode/datalayer": "1.1.*",
+    "coffeecode/router": "1.0.*",
+    "league/plates": "v4.0.0-alpha",
+    "dompdf/dompdf": "0.8.*"
+  }
+}
