@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-	<div class="logo">Logo</div>
+	<div class="logo"><img src=""></div>
 	<nav>
 		<ul>
 			<li><a href="#">Home</a></li>
