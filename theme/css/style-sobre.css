@@ -1,0 +1,16 @@
+.container h1{size: 25px; color: #434C6D;}
+.row{display: flex; flex-direction: row; width: 100%;}
+.row .imagem{float: left; width: 30%; border: 1px solid #333;}
+.row .texto-base{float: right; width: 70%; border: 1px solid #D3d;}
+.imagem img{width: 70%;border-radius: 50%;}
+
+
+
+@media (max-width: 540px)
+{
+	.row{flex-direction: column;}
+	.row .imagem{width: 100%; text-align: center;}
+	.row .imagem img{width: 45%}
+	.row .texto-base{width: 100%}
+
+}

@@ -1,6 +1,6 @@
 <?php
 // DEFINIÇÕES DO SISTEMA
-define("ROOT", "https://www.localhost/Needle");
+define("ROOT", "https://localhost/Needle");
 define("SITE", "Needle");
 define("CREATOR", "Járdesson");
 

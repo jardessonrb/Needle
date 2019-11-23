@@ -16,6 +16,11 @@ Rotas controller WEB - Home, Cadastro
 */
 $route->group(null);
 $route->get("/", "Web:home");
+$route->get("/sobre", "Web:sobre");
+$route->get("/cadastro-empresa", "Web:cadastroEmpresa");
+$route->get("/cadastro-impressora", "Web:cadastroImpressora");
+$route->get("/cadastro-predio", "Web:cadastroPredio");
+$route->get("/cadastro-setor", "Web:cadastroSetor");
 
 /*Rotas controller WEB - Error*/
 
