@@ -22,8 +22,17 @@ class Web
 
 	public function create(array $data): void
 	{
-		$callback["data"] = $data;
-		echo json_encode($data);
+		$userData = filter_var_array($data, FILTER_SANITIZE_STRING);
+		if(in_array("", $userData)){
+			
+			echo json_encode(0);
+
+			return ;
+		}
+
+		$teste = new classTeste();
+
+		echo $teste->criar($userData);
 	}
 
 	public function delete(array $data): void
@@ -32,6 +41,8 @@ class Web
 		$teste = new classTeste();
 
 		$teste->excluir($id);
+
+		echo json_encode("Deu Certo!");
 	}
 
 

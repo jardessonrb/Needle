@@ -21,7 +21,7 @@
 							<td><?php echo $mostrar[0] ?></td>
 							<td><?php echo $mostrar[1] ?></td>
 							<td><?php echo $mostrar[2] ?></td>
-							<td class="remove"><a class="remove" href="#" data-action="<?= $router->route("delete"); ?>" data-id="<?= $mostrar[3]; ?>">Del</a></td>
+							<td class="remove"><a class="remove" href="#" data-action="<?php echo $router->route("web.delete"); ?>" data-id="<?= $mostrar[3]; ?>">Del</a></td>
 						</tr>
 					<?php endWhile; ?>
 
@@ -30,7 +30,7 @@
 			<div class="cadastro">
 				<h4>Cadastro</h4>
 				<div class="row-cadastro">
-					<form class="style-form" name="gallery" action="<?= $router->route("create"); ?>" method="post">
+					<form class="style-form" name="gallery" action="<?= $router->route("web.create"); ?>" method="post">
 						<label class="style-label">Nome</label>
 						<input type="text" name="nome" class="style-input" placeholder="Digite seu nome"></input>
 						<label class="style-label">Sobrenome</label>
@@ -56,17 +56,41 @@
 
 		$("form").submit(function(e){
 			e.preventDefault();
-		})
+
+			var form = $(this);
+			//alert(form.serialize());
+			//alert(form.attr("action"));
+			$.ajax({
+				url: form.attr("action"),
+				data: form.serialize(),
+				type: "POST",
+				datatype: "json",
+				beforeSend: function(){
+					alert("Before");
+				},
+				success: function(mensage){
+					alert("retorno: "+mensage);
+					if(mensage == 1){
+						alert("Cadastrado com sucesso!");
+					}else{
+						alert("Não fi possivel cadastrar!");
+					}
+				},
+				complete: function(){
+					alert("Complete");
+				}
+			});
+		});
+
 		$("body").on("click", "[data-action]", function(e){
-			e.preventDefault();
-			//var tt = $(this).attr("data-id");
-			//alert(tt);
+			e.preventDefault();           //var tt = $(this).attr("data-id");
 			var data = $(this).data();
+			//alert("URL: "+data.action);
 
 			$.post(data.action, data, function(){
-				alert("Nada");
+				alert("Ok");
 			}, "json").fail(function(){
-				alert("data-id");
+				alert(data.action);
 			});
 
 

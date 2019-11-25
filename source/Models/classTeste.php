@@ -7,7 +7,7 @@ class classTeste
 	
 	public function getData()
 	{
-		$id = 1;
+		$id = 0;
 		$con = (new classConnection())->connect();
 
 		$stmt = $con->prepare("SELECT nome_objeto, sobrenome_objeto, idade_objeto, id_objeto FROM tab_teste WHERE id_objeto > ?");
@@ -23,16 +23,42 @@ class classTeste
 		return $result;
 	}
 
-	public function excluir($id): void
+	public function excluir(int $id): void
 	{
 		$ide = $id;
 		$con = (new classConnection())->connect();
 
-		$stmt = $con->prepare("DELETE FROM `tab_teste` WHERE `tab_teste`.`id_objeto` = ?");
+		$stmt = $con->prepare("DELETE FROM tab_teste WHERE id_objeto = ?");
 
 		$stmt->bind_param('s', $ide);
 
 		$stmt->execute();
 
+	}
+
+	public function criar(array $userData)
+	{
+		$nome = $userData["nome"];
+		$sobrenome = $userData["sobrenome"];
+		$idade = $userData["idade"];
+
+		$con = (new classConnection())->connect();
+
+		$stmt = $con->prepare("INSERT INTO tab_teste(nome_objeto, sobrenome_objeto, idade_objeto) VALUES(?, ?, ?)");
+
+		$stmt->bind_param('sss', $nome, $sobrenome, $idade);
+
+		if($stmt->execute()){
+			
+			echo json_encode(1);
+
+			return;
+
+		}else{
+
+			echo json_encode(0);
+
+			return;
+		}
 	}
 }

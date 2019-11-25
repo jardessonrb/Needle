@@ -23,8 +23,8 @@ $route->get("/cadastro-predio", "Web:cadastroPredio");
 $route->get("/cadastro-setor", "Web:cadastroSetor");
 /*ROTAS REFERENTES À PÁGINA TESTE*/
 $route->get("/pagina-teste", "Web:paginaTeste");
-$route->post("/create", "Web:create");
-$route->post("/delete", "Web:delete");
+$route->post("/create", "Web:create", "web.create");
+$route->post("/delete", "Web:delete", "web.delete");
 
 /*Rotas controller WEB - Error*/
 
