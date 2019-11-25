@@ -9,14 +9,14 @@ define("CREATOR", "Járdesson");
 define("BD_HOST", "localhost");
 define("BD_USER", "root");
 define("BD_SENHA", "");
-define("BD_BANCO", "dbo_printer");
+define("BD_BANCO", "dbo_teste");
         
 // DATA_LAYER_CONFIG
 define("DATA_LAYER_CONFIG", [
     "driver" => "mysql",
     "host" => "localhost",
     "port" => "3306",
-    "dbname" => "dbo_printer",
+    "dbname" => "dbo_teste",
     "username" => "root",
     "passwd" => "",
     "options" => [

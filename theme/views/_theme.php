@@ -26,7 +26,7 @@
 			</li>
 			<li class="sub-menu"><a href="#">Portifolio <i class="fas fa-sort-down"></i></a>
 				<ul>
-					<li><a href="#">Link 1</a></li>
+					<li><a href="<?= url("pagina-teste") ?>">Teste</a></li>
 					<li><a href="#">Link 2</a></li>
 					<li><a href="#">Link 3</a></li>
 					<li><a href="#">Link 4</a></li>

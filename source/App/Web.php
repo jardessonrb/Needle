@@ -3,7 +3,7 @@
 
 namespace Source\App;
 
-
+use Source\Models\classTeste;
 use League\Plates\Engine;
 
 
@@ -13,11 +13,29 @@ class Web
 	private $view;
 
 
-	public function __construct()
+	public function __construct($router)
 	{
 		$this->view = Engine::create(__DIR__ ."/../../theme/views", "php");
+		$this->view->addData(["router" => $router]);
 
 	}
+
+	public function create(array $data): void
+	{
+		$callback["data"] = $data;
+		echo json_encode($data);
+	}
+
+	public function delete(array $data): void
+	{
+		$id = ($data["id"]);
+		$teste = new classTeste();
+
+		$teste->excluir($id);
+	}
+
+
+
 	/*Funções de chamada de página - Direcionamento*/
 
 	/*TELAS DE CADASTRO DO SISTEMA*/
@@ -47,6 +65,13 @@ class Web
 
 		echo $this->view->render("cadastro-setor", [
 			"title" => SITE. " | Setor" 
+		]);
+	}
+	public function paginaTeste(): void 
+	{
+		$result = (new classTeste())->getData();
+		echo $this->view->render("pagina-teste", [
+			"title" => SITE. " | Teste" , "result" => $result
 		]);
 	}
 
