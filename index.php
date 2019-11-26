@@ -25,6 +25,8 @@ $route->get("/cadastro-setor", "Web:cadastroSetor");
 $route->get("/pagina-teste", "Web:paginaTeste");
 $route->post("/create", "Web:create", "web.create");
 $route->post("/delete", "Web:delete", "web.delete");
+$route->post("/buscar", "Web:buscar", "web.buscar");
+$route->post("/atualizar", "Web:atualizar", "web.atualizar");
 
 /*Rotas controller WEB - Error*/
 

@@ -39,11 +39,26 @@
 						<input type="text" name="idade" class="style-input" placeholder="Digite sua Idade"></input>
 						<div id="buttons">
 						<button class="style-button" id="cadastrar">Cadastrar</button>
-						<button class="style-button" id="atualizar">Atualizar</button>
 						</div>
 					</form>
 				</div>
-				
+			</div>
+			<div class="atualizar">
+				<h4>Atualizar</h4>
+				<div class="atualizar-body">
+					<label class="style-label">Id objeto</label>
+					<div class="pos-busca">
+					<input class="style-input" id="busca-objeto" type="text" name="id-objeto" placeholder="Id do objeto">
+					<button class="style-button" data-urlBuscar="<?= $router->route("web.buscar"); ?>" id="buscar">Buscar</button>
+					</div>
+					<label class="style-label">nome objeto</label>
+					<input class="style-input" type="text" name="nome-objeto" placeholder="nome do objeto">
+					<label class="style-label">sobrenome objeto</label>
+					<input class="style-input" type="text" name="sobrenome-objeto" placeholder="sobrenome do objeto">
+					<label class="style-label">idade objeto</label>
+					<input class="style-input" type="text" name="idade-objeto" placeholder="idade do objeto">
+					<button class="style-button" id="atualizar">Atualizar</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -94,6 +109,41 @@
 			});
 
 
+		});
+
+		$("#buscar").click(function(){
+			var Idobjeto = document.getElementById('busca-objeto').value;
+			var teste = document.getElementById('buscar');
+			var urlBuscar = teste.getAttribute("data-urlBuscar");
+			idTeste = parseInt(Idobjeto, 10);
+			if (Number.isInteger(idTeste))
+			{
+				alert("URL: "+urlBuscar);
+				$.ajax({
+				url: urlBuscar,
+				data: {Idobjeto: idTeste},
+				type: "POST",
+				datatype: "json",
+				beforeSend: function(){
+					alert("Before");
+				},
+				success: function(mensagem){
+					alert("retorno: "+mensagem);
+					if(mensagem == 0){
+						alert("Falha com sucesso!");
+					}else{
+						dado = jQuery.parseJSON(mensagem);
+						alert(dado["teste"]);
+					}
+				},
+				complete: function(){
+					alert("Complete");
+				}
+			});
+
+			}else{
+				alert("Digite um numero inteiro");
+			}
 		})
 	})
 </script>

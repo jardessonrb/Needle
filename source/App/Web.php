@@ -45,6 +45,24 @@ class Web
 		echo json_encode("Deu Certo!");
 	}
 
+	public function buscar($Idobjeto): void
+	{
+		$id = $Idobjeto;
+		$teste = new classTeste();
+
+		$result = $teste->buscar($id);
+
+		echo $result;
+	}
+	public function atualizar(array $data): void
+	{
+		$id = ($data["id"]);
+		$teste = new classTeste();
+
+		$teste->excluir($id);
+
+		echo json_encode("Deu Certo!");
+	}
 
 
 	/*Funções de chamada de página - Direcionamento*/

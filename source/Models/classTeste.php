@@ -61,4 +61,34 @@ class classTeste
 			return;
 		}
 	}
+
+	public function buscar($id)
+	{
+		$Idobjeto = intval($id);
+
+		$con = (new classConnection())->connect();
+
+		$stmt = $con->prepare("SELECT id_objeto, nome_objeto, sobrenome_objeto, idade_objeto FROM tab_teste WHERE id_objeto = ?");
+
+		$stmt->bind_param("i", $Idobjeto);
+
+		if($stmt->execute()){
+			$result = $stmt->get_result();
+			$dados = array(
+
+				"teste" => "Deu certo"
+			);
+			echo json_encode($dados);
+			return;
+
+		}else{
+
+			echo json_encode(0);
+			return;
+		}
+
+		$stmt->close();
+
+
+	}
 }

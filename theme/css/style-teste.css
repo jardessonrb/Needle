@@ -1,10 +1,14 @@
 table{text-align: center; border: 1px solid #ADA3A3;}
 .style-form{display: flex; flex-direction: column;}
-form label{font-family: Arial; font-size: 20; color: #56565D;}
-form input{border-radius: 10%; border-color: #2C2A2A; background: #FFFFFF; width: 20%; height: 40px; }
+label{font-family: Arial; font-size: 20; color: #56565D;}
+input{border-radius: 10%; border-color: #2C2A2A; background: #FFFFFF; width: 20%; height: 40px; }
 
-form button{height: 40px; width: 9%; cursor: pointer; border-radius: 20%;}
-form button:hover{opacity: 0.8}
-form #cadastrar{background: #3527E9;}
-form #atualizar{background: #0A774A;}
+button{height: 40px; width: 9%; cursor: pointer; border-radius: 20%;}
+button:hover{opacity: 0.8}
+#cadastrar{background: #3527E9;}
+#atualizar{background: #0A774A;}
+#buscar{background: #A45729;}
 .remove{background: #6A6666; color: #F03A3A;}
+.atualizar-body{display: flex; flex-direction: column;}
+.pos-busca{display: flex; flex-direction: row; margin-bottom: 20px;}
+
