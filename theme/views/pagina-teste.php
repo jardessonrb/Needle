@@ -52,11 +52,11 @@
 					<button class="style-button" data-urlBuscar="<?= $router->route("web.buscar"); ?>" id="buscar">Buscar</button>
 					</div>
 					<label class="style-label">nome objeto</label>
-					<input class="style-input" type="text" name="nome-objeto" placeholder="nome do objeto">
+					<input class="style-input" type="text" id="nome-objeto" name="nome-objeto" placeholder="nome do objeto">
 					<label class="style-label">sobrenome objeto</label>
-					<input class="style-input" type="text" name="sobrenome-objeto" placeholder="sobrenome do objeto">
+					<input class="style-input" type="text" id="sobrenome-objeto" name="sobrenome-objeto" placeholder="sobrenome do objeto">
 					<label class="style-label">idade objeto</label>
-					<input class="style-input" type="text" name="idade-objeto" placeholder="idade do objeto">
+					<input class="style-input" type="text" id="idade-objeto" name="idade-objeto" placeholder="idade do objeto">
 					<button class="style-button" id="atualizar">Atualizar</button>
 				</div>
 			</div>
@@ -110,15 +110,17 @@
 
 
 		});
-
+		
+		//METODO POR AJAX 
 		$("#buscar").click(function(){
 			var Idobjeto = document.getElementById('busca-objeto').value;
 			var teste = document.getElementById('buscar');
 			var urlBuscar = teste.getAttribute("data-urlBuscar");
-			idTeste = parseInt(Idobjeto, 10);
+			idTeste = parseInt(Idobjeto);
 			if (Number.isInteger(idTeste))
 			{
-				alert("URL: "+urlBuscar);
+
+				alert("URL: "+urlBuscar+"Id enviado: "+idTeste);
 				$.ajax({
 				url: urlBuscar,
 				data: {Idobjeto: idTeste},
@@ -133,7 +135,10 @@
 						alert("Falha com sucesso!");
 					}else{
 						dado = jQuery.parseJSON(mensagem);
-						alert(dado["teste"]);
+
+						$('#nome-objeto').val(dado['nome']);
+						$('#sobrenome-objeto').val(dado['sobrenome']);
+						$('#idade-objeto').val(dado['idade']);
 					}
 				},
 				complete: function(){
@@ -145,5 +150,6 @@
 				alert("Digite um numero inteiro");
 			}
 		})
+		// ==================== FIM =========================================
 	})
 </script>

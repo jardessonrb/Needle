@@ -68,16 +68,21 @@ class classTeste
 
 		$con = (new classConnection())->connect();
 
-		$stmt = $con->prepare("SELECT id_objeto, nome_objeto, sobrenome_objeto, idade_objeto FROM tab_teste WHERE id_objeto = ?");
+		$stmt = $con->prepare("SELECT nome_objeto, sobrenome_objeto, idade_objeto, id_objeto FROM tab_teste WHERE id_objeto = ?");
 
 		$stmt->bind_param("i", $Idobjeto);
 
 		if($stmt->execute()){
 			$result = $stmt->get_result();
+			$row = $result->fetch_assoc();
 			$dados = array(
 
-				"teste" => "Deu certo"
+				"nome" => $row["nome_objeto"],
+				"sobrenome" => $row["sobrenome_objeto"],
+				"idade" => $row["idade_objeto"]
+
 			);
+
 			echo json_encode($dados);
 			return;
 
@@ -86,8 +91,6 @@ class classTeste
 			echo json_encode(0);
 			return;
 		}
-
-		$stmt->close();
 
 
 	}

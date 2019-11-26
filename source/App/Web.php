@@ -20,6 +20,15 @@ class Web
 
 	}
 
+
+	public function paginaTeste(): void 
+	{
+		$result = (new classTeste())->getData();
+		echo $this->view->render("pagina-teste", [
+			"title" => SITE. " | Teste" , "result" => $result
+		]);
+	}
+
 	public function create(array $data): void
 	{
 		$userData = filter_var_array($data, FILTER_SANITIZE_STRING);
@@ -47,7 +56,7 @@ class Web
 
 	public function buscar($Idobjeto): void
 	{
-		$id = $Idobjeto;
+		$id = $Idobjeto["Idobjeto"];
 		$teste = new classTeste();
 
 		$result = $teste->buscar($id);
@@ -96,14 +105,7 @@ class Web
 			"title" => SITE. " | Setor" 
 		]);
 	}
-	public function paginaTeste(): void 
-	{
-		$result = (new classTeste())->getData();
-		echo $this->view->render("pagina-teste", [
-			"title" => SITE. " | Teste" , "result" => $result
-		]);
-	}
-
+	
 	/*======  FIM ======*/
 	/*PAGINAS DE NAVEGAÇÃO*/
 	public function home(): void 
