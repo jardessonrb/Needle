@@ -46,7 +46,9 @@ class Web
 
 	public function delete(array $data): void
 	{
-		$id = ($data["id"]);
+		$id = filter_var($data["id"], FILTER_VALIDATE_INT);
+		//$id = ($data["id"]);
+
 		$teste = new classTeste();
 
 		$teste->excluir($id);
@@ -65,12 +67,18 @@ class Web
 	}
 	public function atualizar(array $data): void
 	{
-		$id = ($data["id"]);
+		$userData = filter_var_array($data, FILTER_SANITIZE_STRING);
+		//$userData = $data;
+		if(in_array("", $userData)){
+			
+			echo json_encode(3);
+
+			return ;
+		}
+
 		$teste = new classTeste();
 
-		$teste->excluir($id);
-
-		echo json_encode("Deu Certo!");
+		echo $teste->atualizar($userData);
 	}
 
 

@@ -74,24 +74,63 @@ class classTeste
 
 		if($stmt->execute()){
 			$result = $stmt->get_result();
-			$row = $result->fetch_assoc();
-			$dados = array(
+			if($result->num_rows > 0){
+				$row = $result->fetch_assoc();
+				$dados = array(
 
-				"nome" => $row["nome_objeto"],
-				"sobrenome" => $row["sobrenome_objeto"],
-				"idade" => $row["idade_objeto"]
+					"nome" => $row["nome_objeto"],
+					"sobrenome" => $row["sobrenome_objeto"],
+					"idade" => $row["idade_objeto"],
+					"id-objeto" => $row["id_objeto"]
+					
+				);
 
-			);
+				echo json_encode($dados);
+				return;
 
-			echo json_encode($dados);
-			return;
+			}else{
+
+				echo json_encode(1);
+				return;
+			}
 
 		}else{
 
 			echo json_encode(0);
 			return;
 		}
+		$stmt->close();
+		$con->close();
+
+	}
 
 
+	public function atualizar(array $userData)
+	{
+		$nome = $userData["nome-objeto"];
+		$sobrenome = $userData["sobrenome-objeto"];
+		$idade = $userData["idade-objeto"];
+		$id = $userData["Aid-objeto"];
+
+		$con = (new classConnection())->connect();
+		//UPDATE `tab_teste` SET `nome_objeto` = 'Teste 01', `sobrenome_objeto` = 'Teste 01', `idade_objeto` = '25' WHERE `tab_teste`.`id_objeto` = 6;
+
+
+		$stmt = $con->prepare("UPDATE tab_teste SET nome_objeto = ?, sobrenome_objeto = ?, idade_objeto = ? WHERE id_objeto = ?");
+
+		$stmt->bind_param('sssi', $nome, $sobrenome, $idade, $id);
+
+		if($stmt->execute()){
+			
+			echo json_encode(1);
+
+			return;
+
+		}else{
+
+			echo json_encode(0);
+
+			return;
+		}
 	}
 }
