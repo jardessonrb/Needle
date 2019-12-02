@@ -4,6 +4,7 @@
 namespace Source\App;
 
 use Source\Models\classTeste;
+use Source\Models\classPrinter;
 use League\Plates\Engine;
 
 
@@ -33,17 +34,19 @@ class Web
 
 	public function create(array $data): void
 	{
-		$userData = filter_var_array($data, FILTER_SANITIZE_STRING);
-		if(in_array("", $userData)){
+		$printerData = filter_var_array($data, FILTER_SANITIZE_STRING);
+		if(in_array("", $printerData)){
 			
 			echo json_encode(0);
 
 			return ;
 		}
 
-		$teste = new classTeste();
+		//$teste = new classTeste();
+		$printer = new classPrinter();
 
-		echo $teste->criar($userData);
+		//echo $teste->criar($userData);
+		echo $printer->create($printerData);
 	}
 
 	public function delete(array $data): void

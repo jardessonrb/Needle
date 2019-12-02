@@ -62,10 +62,6 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		function load(action){
-
-		}
-
 		$("#cadastro").submit(function(e){
 			e.preventDefault();
 

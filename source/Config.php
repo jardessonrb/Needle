@@ -9,7 +9,7 @@ define("CREATOR", "Járdesson");
 define("BD_HOST", "localhost");
 define("BD_USER", "root");
 define("BD_SENHA", "");
-define("BD_BANCO", "dbo_teste");
+define("BD_BANCO", "dbo_printer");
         
 // DATA_LAYER_CONFIG
 define("DATA_LAYER_CONFIG", [

@@ -18,19 +18,19 @@
 			<li><a href="#">About</a></li>
 			<li class="sub-menu"><a href="#">Serviços <i class="fas fa-sort-down"></i></a>
 				<ul>
-					<li><a href="<?= url("cadastro-impressora") ?>">Cadastro Impressora</a></li>
-					<li><a href="<?= url("cadastro-predio") ?>">Cadastro Predio</a></li>
-					<li><a href="<?= url("cadastro-setor") ?>">Cadastro Setor</a></li>
-					<li><a href="<?= url("cadastro-empresa") ?>">Cadastro Empresa</a></li>
-					<li><a href="<?= url("pagina-usuario") ?>">Usuarios</a></li>
+					<li><a href="<?= url("cadastro-impressora"); ?>">Cadastro Impressora</a></li>
+					<li><a href="<?= url("cadastro-predio"); ?>">Cadastro Predio</a></li>
+					<li><a href="<?= url("cadastro-setor"); ?>">Cadastro Setor</a></li>
+					<li><a href="<?= url("cadastro-empresa"); ?>">Cadastro Empresa</a></li>
+					<li><a href="<?= url("pagina-usuario"); ?>">Usuarios</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu"><a href="#">Relatórios<i class="fas fa-sort-down"></i></a>
 				<ul>
-					<li><a href="<?= url("pagina-teste") ?>">Teste</a></li>
-					<li><a href="<?= url("contagem-pagina") ?>">Contagem de Páginas</a></li>
-					<li><a href="<?= url("contagem-mes") ?>">Fatura Mês</a></li>
-					<li><a href="<?= url("contagem-impressora") ?>">Fatura p/ Impressora</a></li>
+					<li><a href="<?= url("pagina-teste"); ?>">Teste</a></li>
+					<li><a href="<?= url("contagem-pagina"); ?>">Contagem de Páginas</a></li>
+					<li><a href="<?= url("contagem-mes"); ?>">Fatura Mês</a></li>
+					<li><a href="<?= url("contagem-impressora"); ?>">Fatura p/ Impressora</a></li>
 				</ul>
 			</li>
 			<li><a href="<?= url("sobre") ?>">Sobre nós</a></li>
@@ -52,7 +52,13 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.menu-toggle').click(function(){
-			$('nav').toggleClass('active')
+			$('nav').toggleClass('active');
+			if($('#container').hide()){
+				$('#container').show();
+			}else{
+				$('#container').hide();
+			}
+			
 		})
 		$('ul li').click(function (){
 			$(this).siblings().removeClass('active');
