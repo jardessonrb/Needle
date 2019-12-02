@@ -29,6 +29,8 @@ class Web
 		]);
 	}
 
+	/*FUNÇÕES DE INTERAÇÃO COM BANCO DE DADOS*/
+
 	public function create(array $data): void
 	{
 		$userData = filter_var_array($data, FILTER_SANITIZE_STRING);
@@ -72,11 +74,9 @@ class Web
 
 		echo json_encode("Deu Certo!");
 	}
-
+	/*FIM DAS FUNÇÕES DE INTERAÇÃO COM O BANCO*/
 
 	/*Funções de chamada de página - Direcionamento*/
-
-	/*TELAS DE CADASTRO DO SISTEMA*/
 	public function cadastroEmpresa(): void 
 	{
 
@@ -105,9 +105,7 @@ class Web
 			"title" => SITE. " | Setor" 
 		]);
 	}
-	
-	/*======  FIM ======*/
-	/*PAGINAS DE NAVEGAÇÃO*/
+
 	public function home(): void 
 	{
 
@@ -121,6 +119,38 @@ class Web
 
 		echo $this->view->render("sobre", [
 			"title" => SITE. " | Sobre" 
+		]);
+	}
+
+	public function contagemImpressora(): void 
+	{
+
+		echo $this->view->render("contagem-impressora", [
+			"title" => SITE. " | contagem-impressora" 
+		]);
+	}
+
+	public function contagemMes(): void 
+	{
+
+		echo $this->view->render("contagem-mes", [
+			"title" => SITE. " | contagem-mes" 
+		]);
+	}
+
+	public function contagemPagina(): void 
+	{
+
+		echo $this->view->render("contagem-pagina", [
+			"title" => SITE. " | contagem-pagina" 
+		]);
+	}
+
+	public function paginaUsuario(): void 
+	{
+
+		echo $this->view->render("pagina-usuario", [
+			"title" => SITE. " | pagina-usuario" 
 		]);
 	}
 

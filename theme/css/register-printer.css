@@ -1,0 +1,5 @@
+.container{margin: 0; padding: 0; height: 100vh;}
+.row{position: relative; display: flex; flex-direction: column; margin-top: 70px;}
+.row .style-form{display: flex; flex-direction: column;}
+.style-input, .style-select{width: 400px; border-radius: 8%; height: 30px; opacity: 0.6}
+.button-register{width: 100px; height: 40px; border-radius: 30%; background: #22A472; color: #FFF;}

@@ -21,6 +21,11 @@ $route->get("/cadastro-empresa", "Web:cadastroEmpresa");
 $route->get("/cadastro-impressora", "Web:cadastroImpressora");
 $route->get("/cadastro-predio", "Web:cadastroPredio");
 $route->get("/cadastro-setor", "Web:cadastroSetor");
+
+$route->get("/contagem-impressora", "Web:contagemImpressora");
+$route->get("/contagem-mes", "Web:contagemMes");
+$route->get("/contagem-pagina", "Web:contagemPagina");
+$route->get("/pagina-usuario", "Web:paginaUsuario");
 /*ROTAS REFERENTES À PÁGINA TESTE*/
 $route->get("/pagina-teste", "Web:paginaTeste");
 $route->post("/create", "Web:create", "web.create");
