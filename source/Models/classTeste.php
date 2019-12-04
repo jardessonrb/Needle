@@ -68,24 +68,31 @@ class classTeste
 
 		$con = (new classConnection())->connect();
 
-		$stmt = $con->prepare("SELECT nome_objeto, sobrenome_objeto, idade_objeto, id_objeto FROM tab_teste WHERE id_objeto = ?");
+		$stmt = $con->prepare("SELECT numero_serie, modelo_impressora, marca_impressora, tombo_impressora, status_impressora, id_setor, regra_impressora FROM tab_impressora WHERE id_impressora > ?");
 
 		$stmt->bind_param("i", $Idobjeto);
 
 		if($stmt->execute()){
 			$result = $stmt->get_result();
 			if($result->num_rows > 0){
-				$row = $result->fetch_assoc();
-				$dados = array(
 
-					"nome" => $row["nome_objeto"],
-					"sobrenome" => $row["sobrenome_objeto"],
-					"idade" => $row["idade_objeto"],
-					"id-objeto" => $row["id_objeto"]
+				$row = $result->fetch_row();
+
+				//Metodo normal FETCH-ASSOC();
+				// $row = $result->fetch_assoc();
+				// $dados = array(
+
+				// 	"numero_serie" => $row["numero_serie"],
+				// 	"modelo_impressora" => $row["modelo_impressora"],
+				// 	"marca_impressora" => $row["marca_impressora"],
+				// 	"tombo_impressora" => $row["tombo_impressora"],
+				// 	"status_impressora" => $row["status_impressora"],
+				// 	"id_setor" => $row["id_setor"],
+				// 	"regra_impressora" => $row["regra_impressora"]
 					
-				);
+				// );
 
-				echo json_encode($dados);
+				echo json_encode($row);
 				return;
 
 			}else{

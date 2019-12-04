@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
 	<title><?= $title; ?></title>
+	<link rel="shortcut icon" href="<?= url("/theme/img/logo.png"); ?>" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
 	<link rel="stylesheet" type="text/css" href="<?= url("/theme/assets/fontawesome/css/all.css"); ?>">
 	<link rel="stylesheet" type="text/css" href="<?= url("/theme/css/general.css"); ?>">

@@ -1,0 +1,6 @@
+.container{padding: 0; margin: 0; width: 100%;}
+.row{display: flex; flex-direction: column; padding-top: 100px; border: none; align-items: center;}
+.style-pesquisa{display: flex; flex-direction: row; justify-content: flex-end; width: 100%; padding-bottom: 10px;}
+.style-table{width: 80%;}
+.input-pesquisa{width: 300px; padding: 10px; border: 1px solid; border-radius: 5px; opacity: 0.6; position: relative; margin-right: 0;}
+.button-pesquisa{width: 120px; padding: 9px; border: 1px solid; border-radius: 5px; background-color: #2D7EF7; color: #FFF; font-size: 15px; margin-left: 10px; margin-right: 10px;}
