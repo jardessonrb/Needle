@@ -64,35 +64,48 @@ class classTeste
 
 	public function buscar($id)
 	{
-		$Idobjeto = intval($id);
+		//$Idobjeto = intval($id);
+		$nome = "%{$id}%";
 
 		$con = (new classConnection())->connect();
 
-		$stmt = $con->prepare("SELECT numero_serie, modelo_impressora, marca_impressora, tombo_impressora, status_impressora, id_setor, regra_impressora FROM tab_impressora WHERE id_impressora > ?");
+		// $stmt = $con->prepare("SELECT numero_serie, modelo_impressora, marca_impressora, tombo_impressora, status_impressora, id_setor, regra_impressora FROM tab_impressora WHERE id_impressora > ?");
 
-		$stmt->bind_param("i", $Idobjeto);
+		// $stmt->bind_param("i", $Idobjeto);
+
+		$stmt = $con->prepare("SELECT numero_serie, modelo_impressora, marca_impressora, tombo_impressora, status_impressora, id_setor, regra_impressora FROM tab_impressora WHERE numero_serie LIKE ?");
+
+		$stmt->bind_param("s", $nome);
 
 		if($stmt->execute()){
 			$result = $stmt->get_result();
 			if($result->num_rows > 0){
 
-				$row = $result->fetch_row();
+				//$row = $result->fetch_row();
 
 				//Metodo normal FETCH-ASSOC();
-				// $row = $result->fetch_assoc();
-				// $dados = array(
+				$row = $result->fetch_assoc();
+				$i = 0;
 
-				// 	"numero_serie" => $row["numero_serie"],
-				// 	"modelo_impressora" => $row["modelo_impressora"],
-				// 	"marca_impressora" => $row["marca_impressora"],
-				// 	"tombo_impressora" => $row["tombo_impressora"],
-				// 	"status_impressora" => $row["status_impressora"],
-				// 	"id_setor" => $row["id_setor"],
-				// 	"regra_impressora" => $row["regra_impressora"]
+				while ($i < $result->num_rows) {
 					
-				// );
+					$dados[$i] = array(
 
-				echo json_encode($row);
+						"numero_serie" => $row["numero_serie"],
+						"modelo_impressora" => $row["modelo_impressora"],
+						"marca_impressora" => $row["marca_impressora"],
+						"tombo_impressora" => $row["tombo_impressora"],
+						"status_impressora" => $row["status_impressora"],
+						"id_setor" => $row["id_setor"],
+						"regra_impressora" => $row["regra_impressora"]
+						
+					);
+
+					$i += 1;
+
+				}
+
+				echo json_encode($dados);
 				return;
 
 			}else{

@@ -6,7 +6,7 @@
 	<div class="container-body">
 		<div class="row">
 			<div class="style-pesquisa">
-				<input class="input-pesquisa" id="input-pesquisa" placeholder="Digite o final do N° de Serie" required=""></input>
+				<input class="input-pesquisa" id="input-pesquisa" placeholder="Digite o final do N° de Serie" required="" onblur="teste()"></input>
 				<button class="button-pesquisa" id="button-pesquisa" onclick="buscarImpressoras()" data-urlBuscar="<?= $router->route("web.buscar"); ?>">Pesquisar<i class="far fa-search"></i></button>
 			</div>
 			<table border="1" class="style-table">
@@ -38,7 +38,27 @@
 	</div>
 </div>
 <script type="text/javascript">
-	function buscarImpressoras(){
+// $('#input-pesquisa').keyup(function(){
+// 	setTimeout('funcao()', 3000);
+// 	alert("Ok");
+// 	buscarImpressoras();
+// });
+
+// var typingTimer; //timer identifier
+// var doneTypingInterval = 1000;
+// $('#input-pesquisa').keyup(function() {
+//   clearTimeout(typingTimer);
+//   if ($('#input-pesquisa').val) {
+//     typingTimer = setTimeout(doneTyping, doneTypingInterval);
+//   }
+// });
+
+// //user is "finished typing," do something
+// function doneTyping() {
+//   buscarImpressoras();
+// }
+
+function buscarImpressoras(){
 		    var Idobjeto = document.getElementById('input-pesquisa').value;
 		    if(Idobjeto == ""){
 		    	alert("Digite um Id Válido");
@@ -46,73 +66,119 @@
 
 			var teste = document.getElementById('button-pesquisa');
 			var urlBuscar = teste.getAttribute("data-urlBuscar");
-			//alert("URL: "+urlBuscar+" ID: "+Idobjeto);
-			idTeste = parseInt(Idobjeto);
-			if (Number.isInteger(idTeste))
-			{
+			
 
-				//alert("URL: "+urlBuscar+"Id enviado: "+idTeste);
-				$.ajax({
-				url: urlBuscar,
-				data: {Idobjeto: idTeste},
-				type: "POST",
-				datatype: "json",
-				beforeSend: function(){
-					//alert("Before");
-				},
-				success: function(mensagem){
-					//alert("retorno: "+mensagem);
-					if(mensagem == 1){
+			//alert("URL: "+urlBuscar+"Id enviado: "+Idobjeto);
+			$.ajax({
+			url: urlBuscar,
+			data: {Idobjeto: Idobjeto},
+			type: "POST",
+			datatype: "json",
+			beforeSend: function(){
+				//alert("Before");
+			},
+			success: function(mensagem){
+				//alert("retorno: "+mensagem);
+				if(mensagem == 1){
 
-						alert("Nenhum registro com esse código!");
+					alert("Nenhum registro com esse código!");
 
-					}else if (mensagem == 0) {
+				}else if (mensagem == 0) {
 
-						alert("Falha na requisição!");
+					alert("Falha na requisição!");
 
-					}else{
+				}else{
 
-						dado = jQuery.parseJSON(mensagem);
+					dado = jQuery.parseJSON(mensagem);
 
-						criarLinha(dado);
-						// $('#nome-objeto').val(dado['nome']);
-						// $('#sobrenome-objeto').val(dado['sobrenome']);
-						// $('#idade-objeto').val(dado['idade']);
-						// $('#Aid-objeto').val(dado['id-objeto']);
-					}
-				},
-				complete: function(){
-					//alert("Complete");
+					criarLinha(dado);
 				}
-			});
-
-			}else{
-				alert("Digite um numero inteiro");
+			},
+			complete: function(){
+				//alert("Complete");
 			}
-	   }
-	}
+		});
+   }
+}
+
+	//FUNÇÃO BUSCANDO POR ID INTEIRO//
+	// function buscarImpressoras(){
+	// 	    var Idobjeto = document.getElementById('input-pesquisa').value;
+	// 	    if(Idobjeto == ""){
+	// 	    	alert("Digite um Id Válido");
+	// 	    }else{
+
+	// 		var teste = document.getElementById('button-pesquisa');
+	// 		var urlBuscar = teste.getAttribute("data-urlBuscar");
+	// 		//alert("URL: "+urlBuscar+" ID: "+Idobjeto);
+	// 		idTeste = parseInt(Idobjeto);
+	// 		if (Number.isInteger(idTeste))
+	// 		{
+
+	// 			//alert("URL: "+urlBuscar+"Id enviado: "+idTeste);
+	// 			$.ajax({
+	// 			url: urlBuscar,
+	// 			data: {Idobjeto: idTeste},
+	// 			type: "POST",
+	// 			datatype: "json",
+	// 			beforeSend: function(){
+	// 				//alert("Before");
+	// 			},
+	// 			success: function(mensagem){
+	// 				//alert("retorno: "+mensagem);
+	// 				if(mensagem == 1){
+
+	// 					alert("Nenhum registro com esse código!");
+
+	// 				}else if (mensagem == 0) {
+
+	// 					alert("Falha na requisição!");
+
+	// 				}else{
+
+	// 					dado = jQuery.parseJSON(mensagem);
+
+	// 					criarLinha(dado);
+	// 				}
+	// 			},
+	// 			complete: function(){
+	// 				//alert("Complete");
+	// 			}
+	// 		});
+
+	// 		}else{
+	// 			alert("Digite um numero inteiro");
+	// 		}
+	//    }
+	// }
 
 	function criarLinha(dado){
+		//console.log(Object.keys(dado).length);
+		var max = Object.keys(dado).length;
+		var i = 0;
+		var corpo_tabela = document.querySelector("tbody");
+		var template = document.querySelector("#template1");
+		var lista_td = template.content.querySelectorAll("td");
+		var nova_linha;
+		while(i < max){
 
-		dado.forEach(function(e, i){
+			lista_td[0].textContent = dado[i]['numero_serie'];
+			lista_td[1].textContent = dado[i]['modelo_impressora'];
+			lista_td[2].textContent = dado[i]['marca_impressora'];
+			lista_td[3].textContent = dado[i]['tombo_impressora'];
+			lista_td[4].textContent = dado[i]['status_impressora'];
+			lista_td[5].textContent = dado[i]['id_setor'];
+			lista_td[6].textContent = dado[i]['regra_impressora'];
+			
 
-		console.log(i, e);
-		})
+			nova_linha = document.importNode(template.content, true);
+			corpo_tabela.appendChild(nova_linha);
 
-		// var corpo_tabela = document.querySelector("tbody");
-		// var template = document.querySelector("#template1");
-		// var lista_td = template.content.querySelectorAll("td");
-		// lista_td[0].textContent = dado['numero_serie'];
-		// lista_td[1].textContent = dado['modelo_impressora'];
-		// lista_td[2].textContent = dado['marca_impressora'];
-		// lista_td[3].textContent = dado['tombo_impressora'];
-		// lista_td[4].textContent = dado['status_impressora'];
-		// lista_td[5].textContent = dado['id_setor'];
-		// lista_td[6].textContent = dado['regra_impressora'];
-		
+			i += 1;
 
-		// var nova_linha = document.importNode(template.content, true);
-		// corpo_tabela.appendChild(nova_linha);
+		}
+
+
 
 	}
 </script>

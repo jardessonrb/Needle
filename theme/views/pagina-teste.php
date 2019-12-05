@@ -111,14 +111,14 @@
 			var Idobjeto = document.getElementById('busca-objeto').value;
 			var teste = document.getElementById('buscar');
 			var urlBuscar = teste.getAttribute("data-urlBuscar");
-			idTeste = parseInt(Idobjeto);
-			if (Number.isInteger(idTeste))
+			//idTeste = parseInt(Idobjeto);
+			if (Idobjeto != "")
 			{
 
-				//alert("URL: "+urlBuscar+"Id enviado: "+idTeste);
+				alert("URL: "+urlBuscar+"Id enviado: "+Idobjeto);
 				$.ajax({
 				url: urlBuscar,
-				data: {Idobjeto: idTeste},
+				data: {Idobjeto: Idobjeto},
 				type: "POST",
 				datatype: "json",
 				beforeSend: function(){
