@@ -66,14 +66,13 @@ class classTeste
 	{
 		//$Idobjeto = intval($id);
 		$nome = "%{$id}%";
-
 		$con = (new classConnection())->connect();
 
 		// $stmt = $con->prepare("SELECT numero_serie, modelo_impressora, marca_impressora, tombo_impressora, status_impressora, id_setor, regra_impressora FROM tab_impressora WHERE id_impressora > ?");
 
 		// $stmt->bind_param("i", $Idobjeto);
 
-		$stmt = $con->prepare("SELECT numero_serie, modelo_impressora, marca_impressora, tombo_impressora, status_impressora, id_setor, regra_impressora FROM tab_impressora WHERE numero_serie LIKE ?");
+		$stmt = $con->prepare("SELECT DISTINCT numero_serie, modelo_impressora, marca_impressora, tombo_impressora, status_impressora, id_setor, regra_impressora FROM tab_impressora WHERE numero_serie LIKE ?");
 
 		$stmt->bind_param("s", $nome);
 

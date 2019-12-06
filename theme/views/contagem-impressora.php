@@ -6,10 +6,10 @@
 	<div class="container-body">
 		<div class="row">
 			<div class="style-pesquisa">
-				<input class="input-pesquisa" id="input-pesquisa" placeholder="Digite o final do N° de Serie" required="" onblur="teste()"></input>
+				<input class="input-pesquisa" id="input-pesquisa" placeholder="Digite o número de Série da impressora" required="" onblur="teste()"></input>
 				<button class="button-pesquisa" id="button-pesquisa" onclick="buscarImpressoras()" data-urlBuscar="<?= $router->route("web.buscar"); ?>">Pesquisar<i class="far fa-search"></i></button>
 			</div>
-			<table border="1" class="style-table">
+			<table id="id_table" class="style-table">
 				<thead>
 					<th>N° Serie</th>
 					<th>Modelo</th>
@@ -58,108 +58,78 @@
 //   buscarImpressoras();
 // }
 
+
+/*FUNÇÃO INICIAL, PEGA O VALOR DO INPUT E FAZ A INTERAÇÃO COM O BANCO POR AJAX*/
+
 function buscarImpressoras(){
-		    var Idobjeto = document.getElementById('input-pesquisa').value;
-		    if(Idobjeto == ""){
-		    	alert("Digite um Id Válido");
-		    }else{
+    var Idobjeto = document.getElementById('input-pesquisa').value;
 
-			var teste = document.getElementById('button-pesquisa');
-			var urlBuscar = teste.getAttribute("data-urlBuscar");
-			
+    if(Idobjeto == ""){
 
-			//alert("URL: "+urlBuscar+"Id enviado: "+Idobjeto);
-			$.ajax({
-			url: urlBuscar,
-			data: {Idobjeto: Idobjeto},
-			type: "POST",
-			datatype: "json",
-			beforeSend: function(){
-				//alert("Before");
-			},
-			success: function(mensagem){
-				//alert("retorno: "+mensagem);
-				if(mensagem == 1){
+    	alert("Digite um Id Válido");
 
-					alert("Nenhum registro com esse código!");
+    }else{
 
-				}else if (mensagem == 0) {
+		var teste = document.getElementById('button-pesquisa');
+		var urlBuscar = teste.getAttribute("data-urlBuscar");
+		
 
-					alert("Falha na requisição!");
+		//alert("URL: "+urlBuscar+"Id enviado: "+Idobjeto);
+		$.ajax({
+		url: urlBuscar,
+		data: {nomeLike: Idobjeto},
+		type: "POST",
+		datatype: "json",
+		beforeSend: function(){
+			//alert("Before");
+		},
 
-				}else{
+		success: function(mensagem){
+			//alert("retorno: "+mensagem);
+			if(mensagem == 1){
 
-					dado = jQuery.parseJSON(mensagem);
+				alert("Nenhum registro com esse código!");
 
-					criarLinha(dado);
-				}
-			},
-			complete: function(){
-				//alert("Complete");
+			}else if (mensagem == 0) {
+
+				alert("Falha na requisição!");
+
+			}else{
+
+				dado = jQuery.parseJSON(mensagem);
+				criarLinha(dado);
 			}
-		});
-   }
+		},
+
+		complete: function(){
+
+			//alert("Complete");
+		}
+
+
+	   });
+	}
 }
+/*FUNÇÃO QUE ALIMENTA A TABELA COM OS DADOS DO BANCO*/
 
-	//FUNÇÃO BUSCANDO POR ID INTEIRO//
-	// function buscarImpressoras(){
-	// 	    var Idobjeto = document.getElementById('input-pesquisa').value;
-	// 	    if(Idobjeto == ""){
-	// 	    	alert("Digite um Id Válido");
-	// 	    }else{
+function criarLinha(dado){
+	//console.log(Object.keys(dado).length);
+	var max = Object.keys(dado).length;
+	var i = 0;
+	var c = 0;
+	var corpo_tabela = document.querySelector("tbody");
+	var template = document.querySelector("#template1");
+	var lista_td = template.content.querySelectorAll("td");
+	var nova_linha;
 
-	// 		var teste = document.getElementById('button-pesquisa');
-	// 		var urlBuscar = teste.getAttribute("data-urlBuscar");
-	// 		//alert("URL: "+urlBuscar+" ID: "+Idobjeto);
-	// 		idTeste = parseInt(Idobjeto);
-	// 		if (Number.isInteger(idTeste))
-	// 		{
+	for (var j = 0; j < lista_td.length; j++) {
+		lista_td[j] != "";
+		c += 1;
+	}
 
-	// 			//alert("URL: "+urlBuscar+"Id enviado: "+idTeste);
-	// 			$.ajax({
-	// 			url: urlBuscar,
-	// 			data: {Idobjeto: idTeste},
-	// 			type: "POST",
-	// 			datatype: "json",
-	// 			beforeSend: function(){
-	// 				//alert("Before");
-	// 			},
-	// 			success: function(mensagem){
-	// 				//alert("retorno: "+mensagem);
-	// 				if(mensagem == 1){
+	if (c == 0) {
 
-	// 					alert("Nenhum registro com esse código!");
 
-	// 				}else if (mensagem == 0) {
-
-	// 					alert("Falha na requisição!");
-
-	// 				}else{
-
-	// 					dado = jQuery.parseJSON(mensagem);
-
-	// 					criarLinha(dado);
-	// 				}
-	// 			},
-	// 			complete: function(){
-	// 				//alert("Complete");
-	// 			}
-	// 		});
-
-	// 		}else{
-	// 			alert("Digite um numero inteiro");
-	// 		}
-	//    }
-	// }
-
-	function criarLinha(dado){
-		//console.log(Object.keys(dado).length);
-		var max = Object.keys(dado).length;
-		var i = 0;
-		var corpo_tabela = document.querySelector("tbody");
-		var template = document.querySelector("#template1");
-		var lista_td = template.content.querySelectorAll("td");
-		var nova_linha;
 		while(i < max){
 
 			lista_td[0].textContent = dado[i]['numero_serie'];
@@ -178,7 +148,30 @@ function buscarImpressoras(){
 
 		}
 
+	}else{
+
+		var table = $('#id_table').find('tbody');
+		table.empty();
 
 
+		while(i < max){
+
+			lista_td[0].textContent = dado[i]['numero_serie'];
+			lista_td[1].textContent = dado[i]['modelo_impressora'];
+			lista_td[2].textContent = dado[i]['marca_impressora'];
+			lista_td[3].textContent = dado[i]['tombo_impressora'];
+			lista_td[4].textContent = dado[i]['status_impressora'];
+			lista_td[5].textContent = dado[i]['id_setor'];
+			lista_td[6].textContent = dado[i]['regra_impressora'];
+			
+
+			nova_linha = document.importNode(template.content, true);
+			corpo_tabela.appendChild(nova_linha);
+
+			i += 1;
+
+		}
 	}
+
+}
 </script>

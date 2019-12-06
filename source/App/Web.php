@@ -61,12 +61,12 @@ class Web
 		echo json_encode("Deu Certo!");
 	}
 
-	public function buscar($Idobjeto): void
+	public function buscar($nomeLike): void
 	{
-		$id = $Idobjeto["Idobjeto"];
-		$teste = new classTeste();
+		$nomeLikePesquisa = $nomeLike["nomeLike"];
+		$teste = new classPrinter();
 
-		$result = $teste->buscar($id);
+		$result = $teste->buscar($nomeLikePesquisa);
 
 		echo $result;
 	}
